@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Akshay Kumar — Backend Software Developer</title>
+<meta name="description" content="Akshay Kumar — Backend software developer specializing in Java, Spring Boot, Microservices and Kafka." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0F1A;
+    --surface: #121826;
+    --surface-2: #171F30;
+    --border: #26304480;
+    --text: #E8EAF1;
+    --muted: #8A93A8;
+    --muted-2: #5C6479;
+    --accent: #F5B942;
+    --accent-dim: #F5B94222;
+    --ok: #5EEAD4;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --maxw: 880px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, #F5B9420d 0%, transparent 40%),
+      radial-gradient(circle at 85% 15%, #5EEAD40a 0%, transparent 35%);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--accent); color: #0B0F1A; }
+
+  a{ color: inherit; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--ok);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: #0B0F1Ac9;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .nav-inner .brand{ color: var(--text); font-weight:600; }
+  .nav-inner .brand .dot{ color: var(--ok); }
+  .nav-links{ display:flex; gap:22px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ color: var(--muted); text-decoration:none; transition: color .15s; }
+  .nav-links a:hover{ color: var(--accent); }
+  @media (max-width: 640px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO / TERMINAL ---------- */
+  .hero{ padding: 84px 0 56px; }
+  .terminal{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px #000000aa;
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding: 11px 14px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .terminal-bar span{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .terminal-bar .r{ background:#FF5F57; }
+  .terminal-bar .y{ background:#FEBC2E; }
+  .terminal-bar .g{ background:#28C840; }
+  .terminal-bar .title{
+    margin-left: 8px; font-family: var(--mono); font-size:12px; color: var(--muted-2);
+  }
+  .terminal-body{
+    padding: 24px 26px 30px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .terminal-body .line{ display:flex; gap:10px; margin-bottom: 6px; flex-wrap: wrap; }
+  .prompt{ color: var(--ok); white-space:nowrap; }
+  .cmd{ color: var(--text); }
+  .out{ color: var(--muted); padding-left: 0; margin: 4px 0 16px; }
+  .out .k{ color: var(--accent); }
+  #typed-role::after{
+    content:'▌';
+    margin-left:2px;
+    color: var(--accent);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero h1{
+    font-family: var(--mono);
+    font-size: clamp(28px, 5vw, 42px);
+    margin: 30px 0 6px;
+    letter-spacing: -0.5px;
+  }
+  .hero .role{
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+  .hero p.lede{
+    max-width: 620px;
+    color: var(--muted);
+    font-size: 16px;
+  }
+  .cta-row{ display:flex; gap:12px; margin-top: 26px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: 7px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    display:inline-flex; align-items:center; gap:8px;
+    transition: border-color .15s, transform .15s, background .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn.primary{ background: var(--accent); color:#0B0F1A; border-color: var(--accent); font-weight:600; }
+  .btn.primary:hover{ background:#ffc866; }
+  .btn.ghost{ color: var(--text); }
+  .btn.ghost:hover{ border-color: var(--ok); color: var(--ok); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding: 64px 0; border-top: 1px solid var(--border); }
+  .sec-head{
+    display:flex; align-items:baseline; gap: 12px; margin-bottom: 28px;
+  }
+  .sec-head .tag{
+    font-family: var(--mono); color: var(--muted-2); font-size: 13px;
+  }
+  .sec-head h2{
+    font-family: var(--mono);
+    font-size: 20px;
+    margin: 0;
+    color: var(--text);
+  }
+  .sec-head h2 .path{ color: var(--muted-2); font-weight: 400; }
+
+  /* ---------- ABOUT / JSON BLOCK ---------- */
+  .json-block{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 24px;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--muted);
+    overflow-x:auto;
+  }
+  .json-block .k{ color: var(--ok); }
+  .json-block .s{ color: var(--accent); }
+  .json-block .b{ color: var(--muted-2); }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+  }
+  .skill-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .skill-card .h{
+    font-family: var(--mono); font-size: 12px; color: var(--muted-2);
+    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px;
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .chip{
+    font-family: var(--mono); font-size: 12px;
+    padding: 4px 9px; border-radius: 5px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  /* ---------- EXPERIENCE : CHANGELOG ---------- */
+  .log{ position:relative; padding-left: 26px; }
+  .log::before{
+    content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px;
+    background: var(--border);
+  }
+  .log-entry{ position: relative; margin-bottom: 34px; }
+  .log-entry:last-child{ margin-bottom:0; }
+  .log-entry::before{
+    content:''; position:absolute; left:-26px; top:5px;
+    width:11px; height:11px; border-radius:50%;
+    background: var(--bg); border: 2px solid var(--ok);
+  }
+  .log-entry .meta{
+    font-family: var(--mono); font-size: 12px; color: var(--muted-2);
+    display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 6px;
+  }
+  .log-entry .meta .ver{ color: var(--ok); }
+  .log-entry h3{ margin: 0 0 4px; font-size: 17px; font-weight:600; }
+  .log-entry .org{ color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+  .log-entry ul{ margin: 0; padding-left: 18px; color: var(--muted); }
+  .log-entry li{ margin-bottom: 5px; font-size: 14.5px; }
+  .log-entry li::marker{ color: var(--accent); }
+
+  /* ---------- PROJECTS : ENDPOINT CARDS ---------- */
+  .proj-grid{ display:flex; flex-direction:column; gap:16px; }
+  .proj-card{
+    background: var(--surface);
+    border:1px solid var(--border);
+    border-radius: 10px;
+    overflow:hidden;
+  }
+  .proj-route{
+    display:flex; align-items:center; gap:12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+    font-family: var(--mono); font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .method{
+    font-weight:700; font-size:11px; padding: 3px 8px; border-radius:5px;
+    background: var(--accent-dim); color: var(--accent); letter-spacing: .04em;
+  }
+  .route-path{ color: var(--text); }
+  .status{
+    margin-left:auto; font-size: 11px; padding:3px 8px; border-radius:5px;
+    background: #5EEAD422; color: var(--ok); font-weight:600;
+  }
+  .proj-body{ padding: 18px; }
+  .proj-body h3{ margin: 0 0 8px; font-size: 17px; }
+  .proj-body p{ margin: 0 0 12px; color: var(--muted); font-size: 14.5px; }
+  .stack-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 14px; }
+  .proj-links{ display:flex; gap:10px; }
+  .proj-links a{
+    font-family: var(--mono); font-size: 12.5px; text-decoration:none;
+    color: var(--ok); border:1px solid var(--border); padding: 7px 12px; border-radius:6px;
+    display:inline-flex; align-items:center; gap:6px; transition: border-color .15s, color .15s;
+  }
+  .proj-links a:hover{ border-color: var(--ok); }
+
+  .mini-row{ margin-top: 20px; padding-top: 18px; border-top: 1px dashed var(--border); }
+  .mini-h{ font-family: var(--mono); font-size: 12px; color: var(--muted-2); margin-bottom: 10px; }
+  .mini-links{ display:flex; flex-wrap:wrap; gap: 10px; }
+  .mini-link{
+    font-family: var(--mono); font-size: 12.5px; text-decoration:none; color: var(--muted);
+    border:1px solid var(--border); padding: 7px 12px; border-radius:6px;
+    transition: border-color .15s, color .15s;
+  }
+  .mini-link:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- EDUCATION / CERTS ---------- */
+  .two-col{ display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px){ .two-col{ grid-template-columns: 1fr; } }
+  .card{
+    background: var(--surface); border:1px solid var(--border); border-radius:10px; padding: 18px 20px;
+  }
+  .card h3{ margin: 0 0 4px; font-size: 15.5px; }
+  .card .sub{ color: var(--muted); font-size: 13.5px; margin-bottom: 4px; }
+  .card .date{ font-family: var(--mono); font-size: 12px; color: var(--muted-2); }
+  .cert-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .cert-list li{
+    font-size: 14px; color: var(--muted);
+    display:flex; justify-content:space-between; gap:10px;
+    border-bottom: 1px dashed var(--border); padding-bottom: 10px;
+  }
+  .cert-list li:last-child{ border-bottom:none; padding-bottom:0; }
+  .cert-list .name{ color: var(--text); }
+  .cert-list .yr{ font-family: var(--mono); color: var(--muted-2); font-size:12.5px; white-space:nowrap; }
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  footer{ padding: 64px 0 48px; border-top: 1px solid var(--border); }
+  .contact-block{ text-align:center; }
+  .contact-block .tag{ font-family: var(--mono); color: var(--muted-2); font-size:13px; margin-bottom:10px; }
+  .contact-block h2{ font-family: var(--mono); font-size: 26px; margin: 0 0 14px; }
+  .contact-block p{ color: var(--muted); max-width: 480px; margin: 0 auto 26px; }
+  .contact-links{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+  .foot-meta{
+    margin-top: 56px; text-align:center; font-family: var(--mono); font-size:12px; color: var(--muted-2);
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{ opacity:0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">akshay<span class="dot">.</span>dev</div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#education">education</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="r"></span><span class="y"></span><span class="g"></span>
+        <span class="title">akshay@dev — zsh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="line"><span class="prompt">akshay@dev ~ %</span><span class="cmd">whoami</span></div>
+        <div class="out"><span class="k">name</span>: Akshay Kumar &nbsp; <span class="k">status</span>: <span id="typed-role"></span></div>
+        <div class="line"><span class="prompt">akshay@dev ~ %</span><span class="cmd">cat education.txt</span></div>
+        <div class="out">MCA @ COER University — graduating 2026 · CGPA 8.75/10</div>
+      </div>
+    </div>
+
+    <h1>Akshay Kumar</h1>
+    <div class="role">Backend Software Developer — Java · Spring Boot · Microservices · Kafka</div>
+    <p class="lede">
+      I build secure, scalable backend systems — from REST APIs and microservices to async
+      data pipelines. MCA candidate with hands-on experience shipping deployed, production-style
+      projects and debugging real backend workflows in an internship setting.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="#projects">View Projects</a>
+      <a class="btn ghost" href="https://github.com/akshaykumarsrk" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/akshay-kumar121817" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn ghost" href="https://leetcode.com/u/akshaykumarsrk/" target="_blank" rel="noopener">LeetCode ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="tag">01</span>
+      <h2>about <span class="path">/ profile.json</span></h2>
+    </div>
+    <div class="json-block">
+<pre style="margin:0; white-space:pre-wrap;">{
+  <span class="k">"summary"</span>: <span class="s">"MCA candidate (graduating 2026) with hands-on software development
+    experience across Java, Spring Boot, REST APIs, Microservices, and full-stack web
+    applications. Strong foundation in Data Structures & Algorithms, OOP, and DBMS,
+    with practical exposure to coding standards, unit testing, and quality assurance.
+    Quick learner across languages and frameworks, comfortable with ambiguous tasks,
+    and passionate about applying problem-solving skills to real-world projects."</span>,
+  <span class="k">"location"</span>: <span class="s">"India"</span>,
+  <span class="k">"open_to"</span>: <span class="b">[</span><span class="s">"apprenticeships"</span><span class="b">,</span> <span class="s">"internships"</span><span class="b">,</span> <span class="s">"entry-level backend roles"</span><span class="b">]</span>
+}</pre>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="tag">02</span>
+      <h2>skills <span class="path">/ stack.json</span></h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="h">Languages</div>
+        <div class="chip-row">
+          <span class="chip">Java</span><span class="chip">SQL</span><span class="chip">C++</span><span class="chip">Python</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="h">Backend</div>
+        <div class="chip-row">
+          <span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">Hibernate</span><span class="chip">JPA</span><span class="chip">REST APIs</span><span class="chip">Microservices</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="h">Frontend</div>
+        <div class="chip-row">
+          <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="h">Databases</div>
+        <div class="chip-row">
+          <span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="h">Tools & Messaging</div>
+        <div class="chip-row">
+          <span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Maven</span><span class="chip">Postman</span><span class="chip">Apache Kafka</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="h">Core Concepts</div>
+        <div class="chip-row">
+          <span class="chip">DSA</span><span class="chip">OOP</span><span class="chip">DBMS</span><span class="chip">OS</span><span class="chip">Networks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="tag">03</span>
+      <h2>experience <span class="path">/ CHANGELOG.md</span></h2>
+    </div>
+    <div class="log">
+      <div class="log-entry">
+        <div class="meta"><span class="ver">v2025.11</span><span>·</span><span>Nov 2025 – Dec 2025</span></div>
+        <h3>Software Development Intern</h3>
+        <div class="org">Bangmetric — ServiceNow Platform</div>
+        <ul>
+          <li>Developed backend automation workflows for enterprise platforms, applying coding standards and quality checks throughout implementation.</li>
+          <li>Identified and resolved backend workflow issues through systematic testing and debugging, improving system reliability and reducing turnaround time.</li>
+          <li>Collaborated on data workflows and backend processing logic for enterprise applications, coordinating with team members to meet project requirements.</li>
+        </ul>
+      </div>
+      <div class="log-entry">
+        <div class="meta"><span class="ver">v2024.03</span><span>·</span><span>Mar 2024 – Jun 2025</span></div>
+        <h3>Java Full Stack Development Trainee</h3>
+        <div class="org">AccioJob — Remote</div>
+        <ul>
+          <li>Built full-stack applications using Java, Spring Boot, React, and MySQL, contributing to implementation, unit testing, and integration for high-quality deliverables.</li>
+          <li>Designed RESTful APIs following layered architecture and integrated relational databases using Hibernate and JPA.</li>
+          <li>Containerized Spring Boot applications with Docker to ensure consistent development, testing, and deployment across environments.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="tag">04</span>
+      <h2>projects <span class="path">/ api/routes</span></h2>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-route">
+          <span class="method">POST</span>
+          <span class="route-path">/api/v1/shorten</span>
+          <span class="status">200 OK</span>
+        </div>
+        <div class="proj-body">
+          <h3>URL Shortener Application</h3>
+          <p>Secure URL shortening service with JWT-based authentication and role-based access control. Passwords encrypted with BCrypt; short codes generated via Base62 encoding. Containerized and deployed with Docker.</p>
+          <div class="stack-row">
+            <span class="chip">Spring Boot</span><span class="chip">Spring Security</span><span class="chip">JWT</span><span class="chip">MySQL</span><span class="chip">Docker</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/akshaykumarsrk/URL-Shortner" target="_blank" rel="noopener">↳ View Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-route">
+          <span class="method">GET</span>
+          <span class="route-path">/api/v1/activity/stream</span>
+          <span class="status">200 OK</span>
+        </div>
+        <div class="proj-body">
+          <h3>AI-Powered Fitness Application</h3>
+          <p>Full-stack fitness tracker: a modular backend on a microservices architecture with secure OAuth2 authentication via Keycloak, paired with a React + Vite frontend. Asynchronous data processing with Kafka powers real-time activity tracking and analytics APIs.</p>
+          <div class="stack-row">
+            <span class="chip">Spring Boot</span><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Kafka</span><span class="chip">MongoDB</span><span class="chip">SQL</span><span class="chip">Keycloak</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://ai-fitness-tracker-frontend.vercel.app/" target="_blank" rel="noopener">↳ Live Demo</a>
+            <a href="https://github.com/akshaykumarsrk/Fitness-Microservices" target="_blank" rel="noopener">↳ Backend Code</a>
+            <a href="https://github.com/akshaykumarsrk/AI-Fitness-Tracker-Frontend" target="_blank" rel="noopener">↳ Frontend Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-route">
+          <span class="method">WS</span>
+          <span class="route-path">/api/v1/chat/connect</span>
+          <span class="status">200 OK</span>
+        </div>
+        <div class="proj-body">
+          <h3>Chat App</h3>
+          <p>A full-stack real-time chat application, split into separate backend and frontend services for independent development and deployment.</p>
+          <div class="stack-row">
+            <span class="chip">Full-Stack</span><span class="chip">Real-Time</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/akshaykumarsrk/Chat-App" target="_blank" rel="noopener">↳ View Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mini-row">
+      <div class="mini-h">↳ also on the side</div>
+      <div class="mini-links">
+        <a href="https://leetcode.com/u/akshaykumarsrk/" target="_blank" rel="noopener" class="mini-link">LeetCode Profile ↗</a>
+        <a href="https://www.geeksforgeeks.org/profile/akshaykumarlc7u" target="_blank" rel="noopener" class="mini-link">GeeksforGeeks Profile ↗</a>
+        <a href="https://github.com/akshaykumarsrk/Tic-Tac-Toe-Game-using-HTML-CSS-JAVASCRIPT" target="_blank" rel="noopener" class="mini-link">Tic-Tac-Toe (JS) ↗</a>
+        <a href="https://github.com/akshaykumarsrk/Rock-Paper-Scissor-Game-using-HTML-CSS-JAVASCRIPT" target="_blank" rel="noopener" class="mini-link">Rock Paper Scissors (JS) ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="tag">05</span>
+      <h2>education <span class="path">/ & certifications</span></h2>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <h3>Master of Computer Applications (MCA)</h3>
+        <div class="sub">COER University, Roorkee, Uttarakhand</div>
+        <div class="date">2024 – 2026 · Graduating 2026 · CGPA 8.75/10</div>
+      </div>
+      <div class="card">
+        <h3>Bachelor of Computer Applications (BCA)</h3>
+        <div class="sub">Maa Shakumbhari University, Saharanpur</div>
+        <div class="date">2021 – 2024 · CGPA 8.2/10</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <div class="h" style="font-family:var(--mono); font-size:12px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px;">Certifications</div>
+      <ul class="cert-list">
+        <li><span class="name">OCI DevOps Professional — Oracle</span><span class="yr">2025</span></li>
+        <li><span class="name">Prompt Engineering with GitHub Copilot — Microsoft</span><span class="yr">2025</span></li>
+        <li><span class="name">Full Stack Java Development — AccioJob</span><span class="yr">2025</span></li>
+        <li><span class="name">Programming in Java — NPTEL</span><span class="yr">2023</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap contact-block reveal">
+    <div class="tag">06 / connect</div>
+    <h2>$ curl -X POST /contact</h2>
+    <p>Open to apprenticeships, internships, and entry-level backend roles. Reach out — I usually reply within a day.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:akshay121817@gmail.com">Email Me</a>
+      <a class="btn ghost" href="https://github.com/akshaykumarsrk" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/akshay-kumar121817" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn ghost" href="https://leetcode.com/u/akshaykumarsrk/" target="_blank" rel="noopener">LeetCode ↗</a>
+      <a class="btn ghost" href="tel:+917017358371">+91-7017358371</a>
+    </div>
+    <div class="foot-meta">© <span id="yr"></span> Akshay Kumar · built with HTML, CSS & JS</div>
+  </div>
+</footer>
+
+<script>
+  // typed role effect
+  const roles = ["available for apprenticeships", "backend developer", "Java · Spring Boot · Kafka"];
+  const el = document.getElementById('typed-role');
+  let ri = 0, ci = 0, deleting = false;
+
+  function tick(){
+    const word = roles[ri];
+    if(!deleting){
+      ci++;
+      el.textContent = word.slice(0, ci);
+      if(ci === word.length){ deleting = true; setTimeout(tick, 1400); return; }
+    } else {
+      ci--;
+      el.textContent = word.slice(0, ci);
+      if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+    }
+    setTimeout(tick, deleting ? 35 : 55);
+  }
+  tick();
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
